@@ -70,6 +70,7 @@
   background: var(--surface);
   opacity: 0;
   transition: opacity 180ms ease;
+  overscroll-behavior: none
 }
 
 #work-modal-frame.is-ready {
