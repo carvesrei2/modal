@@ -12,10 +12,11 @@
     const body = document.body;
     if (!root || !body) return;
 
-    root.style.backgroundColor = modalBackground;
-    root.style.overscrollBehavior = "none";
-    body.style.backgroundColor = modalBackground;
-    body.style.overscrollBehavior = "none";
+    root.style.setProperty("background-color", modalBackground, "important");
+    root.style.setProperty("overscroll-behavior", "none", "important");
+    root.style.setProperty("color-scheme", "dark", "important");
+    body.style.setProperty("background-color", modalBackground, "important");
+    body.style.setProperty("overscroll-behavior", "none", "important");
   }
 
   function initCaseModalMode() {

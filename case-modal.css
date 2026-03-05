@@ -1,3 +1,7 @@
+html[data-iframe-modal="1"] {
+  color-scheme: dark !important;
+}
+
 html[data-iframe-modal="1"] .menu {
   opacity: 0;
   visibility: hidden;
@@ -15,4 +19,9 @@ html[data-iframe-modal="1"],
 html[data-iframe-modal="1"] body {
   background: var(--bg, #0b0b0d) !important;
   overscroll-behavior: none !important;
+  margin: 0 !important;
+}
+
+html[data-iframe-modal="1"] body {
+  min-height: 100dvh;
 }
