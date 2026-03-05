@@ -53,11 +53,13 @@
 
     const lockBodyScroll = () => {
       lockedScrollY = window.scrollY || window.pageYOffset || 0;
+      document.documentElement.classList.add("modal-open");
       document.body.style.top = `-${lockedScrollY}px`;
       document.body.classList.add("modal-open");
     };
 
     const unlockBodyScroll = () => {
+      document.documentElement.classList.remove("modal-open");
       document.body.classList.remove("modal-open");
       document.body.style.top = "";
       window.scrollTo(0, lockedScrollY);
@@ -82,9 +84,23 @@
       return true;
     };
 
+    const applyIframeModalState = (isFullscreen) => {
+      try {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+        doc.documentElement.setAttribute("data-iframe-modal", "1");
+        doc.documentElement.classList.toggle("modal-fullscreen", isFullscreen);
+        doc.body?.classList.add("modal-embedded");
+        doc.body?.classList.toggle("modal-fullscreen", isFullscreen);
+      } catch (error) {
+        // Ignore cross-origin iframe access restrictions.
+      }
+    };
+
     const setFullscreenState = (isFullscreen) => {
       overlay.classList.toggle("fullscreen", isFullscreen);
       expandButton.setAttribute("aria-pressed", String(isFullscreen));
+      applyIframeModalState(isFullscreen);
       sendFullscreenState(isFullscreen);
     };
 
@@ -176,6 +192,7 @@
     frame.addEventListener("load", () => {
       workModal.classList.remove("is-loading");
       frame.classList.add("is-ready");
+      applyIframeModalState(overlay.classList.contains("fullscreen"));
       sendFullscreenState(overlay.classList.contains("fullscreen"));
     });
 

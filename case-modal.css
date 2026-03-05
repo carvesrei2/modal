@@ -10,3 +10,9 @@ html[data-iframe-modal="1"].modal-fullscreen .menu {
   visibility: visible;
   pointer-events: auto;
 }
+
+html[data-iframe-modal="1"],
+html[data-iframe-modal="1"] body {
+  background: var(--bg, #0b0b0d);
+  overscroll-behavior: none;
+}

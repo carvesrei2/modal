@@ -24,7 +24,7 @@
   position: relative;
   width: min(1120px, 100%);
   height: min(86vh, 840px);
-  background: var(--surface);
+  background: var(--surface, #0b0b0d);
   border-radius: 20px;
   overflow: hidden;
   overscroll-behavior: none;
@@ -68,10 +68,10 @@
   flex: 1;
   display: block;
   border: 0;
-  background: var(--surface);
+  background: var(--surface, #0b0b0d);
   opacity: 0;
   transition: opacity 180ms ease;
-  overscroll-behavior: none
+  overscroll-behavior: none;
 }
 
 #work-modal-frame.is-ready {
@@ -100,12 +100,19 @@
   display: none;
 }
 
+html.modal-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--bg, #0b0b0d);
+}
+
 body.modal-open {
   overflow: hidden;
   position: fixed;
   width: 100%;
   overscroll-behavior: none;
   touch-action: none;
+  background: var(--bg, #0b0b0d);
 }
 
 @media (max-width: 700px) {
