@@ -13,6 +13,6 @@ html[data-iframe-modal="1"].modal-fullscreen .menu {
 
 html[data-iframe-modal="1"],
 html[data-iframe-modal="1"] body {
-  background: var(--bg, #0b0b0d);
-  overscroll-behavior: none;
+  background: var(--bg, #0b0b0d) !important;
+  overscroll-behavior: none !important;
 }

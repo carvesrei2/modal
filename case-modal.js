@@ -5,6 +5,18 @@
   const config = window.PortfolioCaseModalConfig || {};
   const collapseSelector =
     config.collapseSelector || "[data-modal-collapse-trigger], .navigation-link[href='/']";
+  const modalBackground = config.modalBackground || "#0b0b0d";
+
+  function applyIframeBaseStyles() {
+    const root = document.documentElement;
+    const body = document.body;
+    if (!root || !body) return;
+
+    root.style.backgroundColor = modalBackground;
+    root.style.overscrollBehavior = "none";
+    body.style.backgroundColor = modalBackground;
+    body.style.overscrollBehavior = "none";
+  }
 
   function initCaseModalMode() {
     const params = new URLSearchParams(window.location.search);
@@ -12,6 +24,7 @@
     if (window.self === window.top) return;
 
     document.documentElement.setAttribute("data-iframe-modal", "1");
+    applyIframeBaseStyles();
 
     window.addEventListener("message", (event) => {
       if (event.origin !== window.location.origin) return;

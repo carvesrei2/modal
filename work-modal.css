@@ -68,7 +68,7 @@
   flex: 1;
   display: block;
   border: 0;
-  background: var(--surface, #0b0b0d);
+  background: var(--surface, #0b0b0d) !important;
   opacity: 0;
   transition: opacity 180ms ease;
   overscroll-behavior: none;
