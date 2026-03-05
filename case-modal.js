@@ -5,19 +5,6 @@
   const config = window.PortfolioCaseModalConfig || {};
   const collapseSelector =
     config.collapseSelector || "[data-modal-collapse-trigger], .navigation-link[href='/']";
-  const modalBackground = config.modalBackground || "#0b0b0d";
-
-  function applyIframeBaseStyles() {
-    const root = document.documentElement;
-    const body = document.body;
-    if (!root || !body) return;
-
-    root.style.setProperty("background-color", modalBackground, "important");
-    root.style.setProperty("overscroll-behavior", "none", "important");
-    root.style.setProperty("color-scheme", "dark", "important");
-    body.style.setProperty("background-color", modalBackground, "important");
-    body.style.setProperty("overscroll-behavior", "none", "important");
-  }
 
   function initCaseModalMode() {
     const params = new URLSearchParams(window.location.search);
@@ -25,7 +12,6 @@
     if (window.self === window.top) return;
 
     document.documentElement.setAttribute("data-iframe-modal", "1");
-    applyIframeBaseStyles();
 
     window.addEventListener("message", (event) => {
       if (event.origin !== window.location.origin) return;
