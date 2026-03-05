@@ -48,7 +48,20 @@
     const workModal = document.getElementById(modalId);
     const frame = document.getElementById(frameId);
     const expandButton = document.getElementById(expandId);
+    let lockedScrollY = 0;
     if (!overlay || !workModal || !frame || !expandButton) return;
+
+    const lockBodyScroll = () => {
+      lockedScrollY = window.scrollY || window.pageYOffset || 0;
+      document.body.style.top = `-${lockedScrollY}px`;
+      document.body.classList.add("modal-open");
+    };
+
+    const unlockBodyScroll = () => {
+      document.body.classList.remove("modal-open");
+      document.body.style.top = "";
+      window.scrollTo(0, lockedScrollY);
+    };
 
     const sendFullscreenState = (isFullscreen) => {
       frame.contentWindow?.postMessage(
@@ -83,7 +96,7 @@
 
     const closeModal = () => {
       overlay.classList.remove("open");
-      document.body.classList.remove("modal-open");
+      unlockBodyScroll();
       resetFullscreen();
       workModal.classList.remove("is-loading");
       window.setTimeout(() => {
@@ -96,7 +109,7 @@
       const shouldLoad = frame.getAttribute("src") !== modalUrl;
 
       overlay.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
+      lockBodyScroll();
       window.requestAnimationFrame(() => {
         overlay.classList.add("open");
       });
